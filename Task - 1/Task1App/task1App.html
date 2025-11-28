@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-m-around_medium" style="background-color: white; border-radius: 4px;">
+        <div class="slds-m-around_medium" style="background-color: white; border-radius: 4px; padding: 1rem">
+            <div class="slds-m-around_medium" style="display: flex; justify-content:center;">
+                <lightning-input type="search" placeholder="Enter 2 chars to start search" label="Search" onchange={handleSearchKeyChange} min-length="2" style="width: 30%; margin-right: 1rem;"></lightning-input>
+                <lightning-combobox name="feild" label="Select Field" value={feild} options={options} onchange={handleFeildChange}></lightning-combobox>
+            </div>
+            <lightning-button label="Search 🔍" onclick={handleSearch} style="display: flex; justify-content:center; width: 80%"></lightning-button>
+        </div>
+
+        <lightning-tabset>
+
+            <lightning-tab label="Account" >
+                <c-task1-account-list-view search-key={searchkeyValue} feild={feildValue}></c-task1-account-list-view>
+            </lightning-tab>
+
+            <lightning-tab label="Contact">
+                <c-task1-contact-list-view search-key={searchkeyValue} feild={feildValue}></c-task1-contact-list-view>
+            </lightning-tab>
+
+            <lightning-tab label="Opportunity">
+                <c-task1-opportunity-list-view search-key={searchkeyValue} feild={feildValue}></c-task1-opportunity-list-view>
+            </lightning-tab>
+            
+            <lightning-tab label="Case">
+                <c-task1-case-list-view search-key={searchkeyValue} feild={feildValue}></c-task1-case-list-view>
+            </lightning-tab>
+        </lightning-tabset>
+    </div>
+</template>
