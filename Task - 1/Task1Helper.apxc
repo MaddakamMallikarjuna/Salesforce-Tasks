@@ -1,0 +1,38 @@
+public with sharing class Task1Helper {
+    
+    @AuraEnabled(cacheable=true)
+    public static List<Account> getAccountRecordsByKey(String feildName, String searchKey) {
+        
+        if(searchKey == null) return [Select Id, Name, Email__c, Rating From Account];
+        String key = '*' + searchKey + '*';
+        String query = 'FIND { ' + key +' } IN ' +  feildName + ' FIELDS RETURNING Account(Id, Name, Email__c, Rating)';
+        return Search.query(query)[0];
+    } 
+    
+    @AuraEnabled(cacheable=true)
+    public static List<Contact> getContactRecordsByKey(String feildName, String searchKey) {
+        
+        if(searchKey == null) return [Select Id, lastName, Account.Id, Account.Name, Email, Phone From Contact];
+        String key = '*' + searchKey + '*';
+        String query = 'FIND { ' + key +' } IN ' +  feildName + ' FIELDS RETURNING Contact(Id, lastName, Account.Id, Account.Name, Email, Phone)';
+        return Search.query(query)[0];
+    } 
+    
+    @AuraEnabled(cacheable=true)
+    public static List<Opportunity> getOpportunityRecordsByKey(String feildName, String searchKey) {
+        
+        if(searchKey == null) return [Select Id, Name, Account.Id, Account.Name, Amount, stageName From Opportunity];
+        String key = '*' + searchKey + '*';
+        String query = 'FIND { ' + key +' } IN ' +  feildName + ' FIELDS RETURNING Opportunity(Id, Name, Account.Id, Account.Name, Amount, stageName)';
+        return Search.query(query)[0];
+    }
+    
+    @AuraEnabled(cacheable=true)
+    public static List<Case> getCaseRecordsByKey(String feildName, String searchKey) {
+        
+        if(searchKey == null) return [Select Id, CaseNumber, Status, ContactEmail  From Case];
+        String key = '*' + searchKey + '*';
+        String query = 'FIND { ' + key +' } IN ' +  feildName + ' FIELDS RETURNING Case(Id, CaseNumber, Status, ContactEmail )';
+        return Search.query(query)[0];
+    }
+}
